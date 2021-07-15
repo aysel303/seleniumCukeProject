@@ -4,6 +4,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,6 +15,7 @@ public class BrowserUtils {
 	Alert alert;
 	WebDriverWait letswait;
 	static Select letsSelect;
+	Actions act;
 
 	public void switchToAlert() {
 		alert = Driver.getDriver().switchTo().alert();
@@ -50,12 +52,7 @@ public class BrowserUtils {
 		letsSelect.selectByVisibleText(optionToSelect);
 	}
 	
-	public void clearValueOnTheField(WebElement element) {
-		String temp = element.getAttribute("value");
-		for (int i = 0; i < temp.length(); i++) {
-			element.sendKeys(Keys.BACK_SPACE);
-		}
-	}
+	
 	
 	public boolean isElementPresent(WebElement element) {
 		try {
@@ -65,4 +62,45 @@ public class BrowserUtils {
 		}
 		return true;
 	}
+	
+	// hover over to an element
+		public void hoverOverToElement(WebElement element) {
+			act = new Actions(Driver.getDriver());
+			act.moveToElement(element).perform();
+		}
+		
+		// hover over to an element
+			public void hoverOverToElementAndClick(WebElement element) {
+				act = new Actions(Driver.getDriver());
+				act.moveToElement(element).click();
+				}
+
+		// drag the source element to the target element
+		public void dragAndDrop(WebElement sourceElement, WebElement tagtetElement) {
+			act = new Actions(Driver.getDriver());
+			act.dragAndDrop(sourceElement, tagtetElement).perform();
+		}
+
+		// this method is for deleting the pre-populated value of an input field with
+		// back space key events
+		public void clearValueOnTheField(WebElement element) {
+			String temp = element.getAttribute("value");
+			for (int i = 0; i < temp.length(); i++) {
+				element.sendKeys(Keys.BACK_SPACE);
+			}
+		}
+
+		// this method is for deleting the pre-populated value of an input field with
+		// control + a keys event for windows
+		public void clearTextOfTheField(WebElement element) {
+			element.sendKeys(Keys.chord(Keys.CONTROL), "a");
+			element.sendKeys(Keys.DELETE);
+		}
+
+		// this method is for deleting the pre-populated value of an input field with
+		// command + a keys event for mac
+		public void clearTextOfAField(WebElement element) {
+			element.sendKeys(Keys.chord(Keys.COMMAND), "a");
+			element.sendKeys(Keys.DELETE);
+		}
 }

@@ -1,0 +1,18 @@
+{
+    "id": 356098,
+    "category": {
+        "id": 2,
+        "name": "kitten"
+    },
+    "name": "roar",
+    "photoUrls": [
+        "www.amazon1.com"
+    ],
+    "tags": [
+        {
+            "id": 12,
+            "name": "roar"
+        }
+    ],
+    "status": "available"
+}
