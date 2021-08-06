@@ -24,6 +24,7 @@ public class AmazonLogin {
 
 	@Then("Sign in button is displayed")
 	public void sign_in_button_is_displayed() {
+		utils.waitUntilElementVisible(amazonpage.signinSecurelyBtn);
 	    Assert.assertTrue(amazonpage.signinSecurelyBtn.isDisplayed());
 	}
 

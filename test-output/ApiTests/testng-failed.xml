@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="2" name="Failed suite [ApiTests]" guice-stage="DEVELOPMENT">
+  <test thread-count="2" name="Smoke(failed)">
+    <classes>
+      <class name="api_tests.PetStoreTest">
+        <methods>
+          <include name="findById"/>
+          <include name="addNewPetWithJsonFile"/>
+          <include name="addNewPet"/>
+          <include name="deletePet"/>
+          <include name="addNewPetWithInvalidJsonData"/>
+        </methods>
+      </class> <!-- api_tests.PetStoreTest -->
+    </classes>
+  </test> <!-- Smoke(failed) -->
+</suite> <!-- Failed suite [ApiTests] -->

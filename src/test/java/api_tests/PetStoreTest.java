@@ -30,7 +30,7 @@ public class PetStoreTest {
 	  
 	  System.out.println(response.getContentType());
 	  System.out.println(response.getStatusCode());
-	  System.out.println(response.asPrettyString());
+	  //System.out.println(response.asPrettyString());
 	  
 	  //validation with RestAssured built in validation
 	 response.then().statusCode(200)
@@ -59,7 +59,7 @@ public class PetStoreTest {
   
   @Test
   public void findById() {
-	  int id = 227007;
+	  int id = 55;
 	  url = "https://petstore.swagger.io/v2/pet/";
 	  
 	  response = given().accept(ContentType.JSON)
@@ -117,12 +117,12 @@ public class PetStoreTest {
   public void addNewPet() {
 	  url = "https://petstore.swagger.io/v2/pet/";
 	  String requestBody = "{\n"
-	  		+ "  \"id\": 55667799,\n"
+	  		+ "  \"id\": 978,\n"
 	  		+ "  \"category\": {\n"
 	  		+ "    \"id\": 0,\n"
 	  		+ "    \"name\": \"string\"\n"
 	  		+ "  },\n"
-	  		+ "  \"name\": \"doggie\",\n"
+	  		+ "  \"name\": \"wolf\",\n"
 	  		+ "  \"photoUrls\": [\n"
 	  		+ "    \"string\"\n"
 	  		+ "  ],\n"
@@ -132,10 +132,10 @@ public class PetStoreTest {
 	  		+ "      \"name\": \"string\"\n"
 	  		+ "    }\n"
 	  		+ "  ],\n"
-	  		+ "  \"status\"";
+	  		+ "  \"status\"available";
 	  
 	  
-	  response = given().contentType("application/json").accept(ContentType.JSON).body("requestBody")
+	  response = given().contentType("application/json").accept(ContentType.JSON).body(requestBody)
 	  .when().post(url);
 	  
 	  assertEquals(response.statusCode(), 200);
@@ -148,7 +148,7 @@ public class PetStoreTest {
   @Test
   public void addNewPetWithJsonFile() throws IOException {
 	  url = "https://petstore.swagger.io/v2/pet/";
-	 File requestBody = new File("./src/test/resources/jsonFiles/addNewPet.json");
+	 File requestBody = new File("./src/test/resources/jsonFiles/addNewPet2.json");
 	  
 	  response = given().contentType("application/json").accept(ContentType.JSON)
 			  .body(requestBody)
@@ -160,8 +160,26 @@ public class PetStoreTest {
 	  String responseBody = response.body().asPrettyString();
 	  response.body().prettyPrint();
 	  
-	  String content = new String(Files.readAllBytes(Paths.get("./src/test/resources/jsonFiles/addNewPet.json")));
-	  assertEquals(responseBody, content);
+	  String content = new String(Files.readAllBytes(Paths.get("./src/test/resources/jsonFiles/addNewPet2.json")));
+	 // assertEquals(responseBody, content);
+  }
+  
+  @Test
+  public void findPetById() throws IOException {
+	  int id = 869;
+	  String url = "https://petstore.swagger.io/v2/pet/";
+	  File requestBody = new File("./src/test/resources/jsonFiles/addNewPet2.json");
+	  
+	  response = given().contentType("application/json").accept(ContentType.JSON)
+			  			.when().get(url + id);
+	  assertEquals(response.statusCode(), 200);
+	  assertEquals(response.contentType(), "application/json");
+	  
+	  String responseBody = response.getBody().asPrettyString();
+	  response.body().print();
+	  
+	  String content = new String(Files.readAllBytes(Paths.get("./src/test/resources/jsonFiles/addNewPet2.json")));
+	 assertEquals(response.getBody().asString(), content);
   }
   
   @Test

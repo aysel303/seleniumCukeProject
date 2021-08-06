@@ -5,7 +5,7 @@
     <classes>
       <class name="api_tests.PetStoreTest">
         <methods>
-          <include name="deletePet"/>
+          <include name="findById"/>
         </methods>
       </class> <!-- api_tests.PetStoreTest -->
     </classes>

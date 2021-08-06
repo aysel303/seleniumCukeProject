@@ -37,4 +37,5 @@ public class AmazonPage {
 	
 	@FindBy(id = "ap_password")
 	public WebElement signInPasswordField;
+
 }
